@@ -7,7 +7,7 @@ photo_alt: Portrait of Luke
 initials: LY
 socials:
   - label: LinkedIn
-    url: ""
+    url: https://www.linkedin.com/in/luke-y-364009172/
   - label: Strava
     url: ""
 ---
