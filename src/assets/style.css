@@ -20,7 +20,7 @@ a { color: var(--accent); text-underline-offset: 4px; }
 a:hover { text-decoration-thickness: 2px; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .site-header, .site-footer, nav, .actions, .post-actions { display: flex; align-items: center; }
-.site-header { justify-content: space-between; padding: 36px 0; border-bottom: 1px solid var(--rule); }
+.site-header { justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 36px 0; border-bottom: 1px solid var(--rule); }
 .site-name { color: var(--ink); font-size: 27px; font-weight: bold; text-decoration: none; }
 nav { gap: 26px; font: 14px/1.5 system-ui, sans-serif; }
 nav a { color: var(--muted); text-decoration: none; }
@@ -45,6 +45,17 @@ p { margin: 0 0 24px; }
 .manage-list li { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px; padding: 16px 0; border-top: 1px solid var(--rule); }
 .post-actions { gap: 18px; font-size: 13px; }
 main img { display: block; max-width: 100%; height: auto; margin: 28px auto; }
+.profile { display: grid; grid-template-columns: 144px minmax(0, 1fr); gap: 40px; align-items: start; }
+.profile-portrait { padding-top: 7px; }
+.profile-photo, .profile-placeholder { width: 144px; height: 144px; border-radius: 50%; }
+.profile-photo { margin: 0; object-fit: cover; }
+.profile-placeholder { display: grid; place-items: center; background: #e9ede6; color: var(--accent); border: 1px solid #d9e0d5; font-size: 36px; letter-spacing: -1px; }
+.profile-copy h1 { margin-bottom: 24px; }
+.profile-copy p { margin-bottom: 20px; }
+.profile-copy .eyebrow { margin-bottom: 0; }
+.social-links { display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 28px 0 0; padding: 0; list-style: none; font: 14px/1.7 system-ui, sans-serif; }
+.social-pending { color: var(--muted); }
+.profile-copy .journal-link { margin: 44px 0 0; font-size: 17px; }
 .prose blockquote { margin: 24px 0; padding-left: 24px; border-left: 2px solid var(--rule); color: var(--muted); }
 code { font-size: 0.85em; }
 pre { max-width: 100%; overflow: auto; padding: 16px; background: #eeeee7; }
@@ -52,8 +63,15 @@ pre { max-width: 100%; overflow: auto; padding: 16px; background: #eeeee7; }
 .site-footer a { color: var(--muted); }
 .skip-link { position: absolute; left: -10000px; }
 .skip-link:focus { left: 16px; top: 8px; background: var(--paper); padding: 8px; }
+@media (max-width: 560px) {
+  .profile { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .profile-portrait { padding-top: 0; }
+  .profile-photo, .profile-placeholder { width: 112px; height: 112px; }
+}
 @media (max-width: 480px) {
   body { padding: 0 24px; font-size: 18px; }
   .site-header { padding: 24px 0; }
+  .site-name { font-size: 24px; }
+  nav { gap: 18px; }
   main { padding: 48px 0 64px; }
 }

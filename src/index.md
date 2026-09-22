@@ -1,14 +1,18 @@
 ---
-layout: base.njk
+layout: about.njk
 title: About
 section: about
+photo: ""
+photo_alt: Portrait of Luke
+initials: LY
+socials:
+  - label: LinkedIn
+    url: ""
+  - label: Strava
+    url: ""
 ---
-<p class="eyebrow">A personal notebook</p>
-
 # Hi, I'm Luke.
 
-This is a place for my thoughts, travel notes, and things I'd like to remember.
+I keep notes on where I go, what I'm thinking about, and the small things worth remembering.
 
-Nothing elaborate. Just a little space to write things down.
-
-[Read the journal →](/journal/)
+This is where they live.

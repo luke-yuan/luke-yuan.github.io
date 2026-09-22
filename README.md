@@ -1,4 +1,4 @@
-# Luke's notebook
+# Along the Way
 
 A small personal site for thoughts and travel, hosted at <https://luke-yuan.github.io>.
 Eleventy turns Markdown into static HTML. GitHub Actions publishes each change to `master`.
@@ -41,6 +41,28 @@ For a photo, use **Upload photos** on the Manage page to upload it to `src/asset
 then include `![Description](/assets/photo.jpg)` in a post. JPG, PNG, GIF, and WebP
 work. Use filenames without spaces and resize large photos before uploading.
 Images automatically fit the page on phones and larger screens.
+
+## Profile photo, blurb, and socials
+
+Choose **Edit About** on the Manage page. All profile content lives in `src/index.md`:
+
+- Upload a photo using **Upload photos**, then set `photo: /assets/profile.jpg`.
+  The photo appears in a circular crop. Leave `photo: ""` to show your initials.
+- Set `photo_alt` to a short description of the photo and `initials` to your initials.
+- Edit the paragraphs below the second `---` line to change your blurb.
+- Add social links under `socials`, using a label and full URL for each:
+
+```yaml
+socials:
+  - label: LinkedIn
+    url: https://www.linkedin.com/in/your-profile/
+  - label: Strava
+    url: https://www.strava.com/athletes/your-id
+```
+
+Leave a URL blank (`url: ""`) to show just the platform's name until you add the
+link, or use `socials: []` to hide the social links. Change the site title using the `name`
+field in `src/_data/site.json`.
 
 ## Local preview
 

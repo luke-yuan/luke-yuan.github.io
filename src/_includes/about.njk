@@ -1,0 +1,32 @@
+---
+layout: base.njk
+---
+<section class="profile" aria-label="About me">
+  <div class="profile-portrait">
+    {% if photo %}
+      <img class="profile-photo" src="{{ photo | escape }}" alt="{{ photo_alt | escape }}" width="144" height="144">
+    {% else %}
+      <div class="profile-placeholder" role="img" aria-label="Profile photo placeholder">
+        <span aria-hidden="true">{{ initials | escape }}</span>
+      </div>
+    {% endif %}
+  </div>
+  <div class="profile-copy">
+    <p class="eyebrow">A personal notebook</p>
+    {{ content | safe }}
+    {% if socials | length %}
+      <ul class="social-links" aria-label="Social links">
+        {% for social in socials %}
+          <li>
+            {% if social.url %}
+              <a href="{{ social.url | escape }}">{{ social.label | escape }} <span aria-hidden="true">↗</span></a>
+            {% else %}
+              <span class="social-pending" title="Profile link coming soon">{{ social.label | escape }}</span>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    <p class="journal-link"><a href="/journal/">Read the journal →</a></p>
+  </div>
+</section>
