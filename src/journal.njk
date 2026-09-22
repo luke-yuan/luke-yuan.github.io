@@ -1,0 +1,20 @@
+---
+layout: base.njk
+title: Journal
+section: journal
+permalink: /journal/
+---
+<p class="eyebrow">Thoughts &amp; travels</p>
+<h1>Journal</h1>
+{% if collections.posts | length %}
+  <ol class="post-list">
+    {% for post in collections.posts | reverse %}
+      <li>
+        <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+        <a href="{{ post.url }}">{{ post.data.title | escape }}</a>
+      </li>
+    {% endfor %}
+  </ol>
+{% else %}
+  <p class="muted">No notes yet. More soon.</p>
+{% endif %}

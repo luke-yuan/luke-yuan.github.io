@@ -1,0 +1,10 @@
+---
+layout: base.njk
+section: journal
+---
+<article>
+  <a class="back-link" href="/journal/">← All notes</a>
+  <h1>{{ title | escape }}</h1>
+  <p class="post-date"><time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time></p>
+  <div class="prose">{{ content | safe }}</div>
+</article>

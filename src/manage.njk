@@ -1,0 +1,33 @@
+---
+layout: base.njk
+title: Manage
+permalink: /manage/
+---
+<p class="eyebrow">Your notebook</p>
+<h1>Make a note.</h1>
+<p>Write and edit in GitHub. Only people with write access to the repository can publish changes.</p>
+{% set postTemplate = "---\ntitle: A new note\n---\n\nWrite your thoughts here.\n" %}
+<div class="actions">
+  <a class="button" href="{{ site.repo }}/new/{{ site.branch }}/src/posts?value={{ postTemplate | urlencode }}">New post ↗</a>
+  <a href="{{ site.repo }}/edit/{{ site.branch }}/src/index.md">Edit About ↗</a>
+  <a href="{{ site.repo }}/upload/{{ site.branch }}/src/assets">Upload photos ↗</a>
+</div>
+<p class="hint">Name your post <code>YYYY-MM-DD-short-title.md</code>, change its title, and write below the second <code>---</code> line. Choose <strong>Commit changes</strong> and commit directly to <strong>{{ site.branch }}</strong> to publish. Updates usually appear within a few minutes.</p>
+<p class="hint">For photos, upload a JPG, PNG, GIF, or WebP with a simple filename such as <code>kyoto.jpg</code>, then add <code>![Sunset in Kyoto](/assets/kyoto.jpg)</code> to your post. Resize large photos before uploading so pages load quickly.</p>
+<h2>Published notes</h2>
+{% if collections.posts | length %}
+  <ul class="manage-list">
+    {% for post in collections.posts | reverse %}
+      <li>
+        <a href="{{ post.url }}">{{ post.data.title | escape }}</a>
+        <span class="post-actions">
+          <a href="{{ site.repo }}/edit/{{ site.branch }}/{{ post.inputPath | githubPath }}" aria-label="Edit {{ post.data.title | escape }}">Edit ↗</a>
+          <a href="{{ site.repo }}/delete/{{ site.branch }}/{{ post.inputPath | githubPath }}" aria-label="Delete {{ post.data.title | escape }}">Delete ↗</a>
+        </span>
+      </li>
+    {% endfor %}
+  </ul>
+  <p class="hint">Delete opens GitHub's confirmation page. Commit the deletion to remove a note from this site. Its earlier versions remain in Git history.</p>
+{% else %}
+  <p class="muted">Your notes will appear here after you publish one.</p>
+{% endif %}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ (description or site.description) | escape }}">
+    <title>{{ title | escape }} · {{ site.name | escape }}</title>
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="site-name" href="/">{{ site.name | escape }}.</a>
+      <nav aria-label="Main navigation">
+        <a href="/"{% if section == "about" %} aria-current="page"{% endif %}>About</a>
+        <a href="/journal/"{% if section == "journal" %} aria-current="page"{% endif %}>Journal</a>
+      </nav>
+    </header>
+    <main id="main">{{ content | safe }}</main>
+    <footer class="site-footer">
+      <span>A small corner of the internet.</span>
+      <a href="/manage/">Manage</a>
+    </footer>
+  </body>
+</html>
