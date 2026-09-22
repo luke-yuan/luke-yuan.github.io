@@ -20,8 +20,7 @@ a { color: var(--accent); text-underline-offset: 4px; }
 a:hover { text-decoration-thickness: 2px; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .site-header, .site-footer, nav, .actions, .post-actions { display: flex; align-items: center; }
-.site-header { justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 36px 0; border-bottom: 1px solid var(--rule); }
-.site-name { color: var(--ink); font-size: 27px; font-weight: bold; text-decoration: none; }
+.site-header { justify-content: flex-end; padding: 30px 0; border-bottom: 1px solid var(--rule); }
 nav { gap: 26px; font: 14px/1.5 system-ui, sans-serif; }
 nav a { color: var(--muted); text-decoration: none; }
 nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; }
@@ -52,9 +51,14 @@ main img { display: block; max-width: 100%; height: auto; margin: 28px auto; }
 .profile-placeholder { display: grid; place-items: center; background: #e9ede6; color: var(--accent); border: 1px solid #d9e0d5; font-size: 36px; letter-spacing: -1px; }
 .profile-copy h1 { margin-bottom: 24px; }
 .profile-copy p { margin-bottom: 20px; }
-.profile-copy .eyebrow { margin-bottom: 0; }
-.social-links { display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 28px 0 0; padding: 0; list-style: none; font: 14px/1.7 system-ui, sans-serif; }
-.social-pending { color: var(--muted); }
+.social-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 30px 0 0; padding: 0; list-style: none; }
+.social-icon { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--rule); border-radius: 50%; background: transparent; transition: border-color 150ms ease, transform 150ms ease; }
+.social-icon svg { width: 18px; height: 18px; fill: currentColor; }
+a.social-icon { text-decoration: none; }
+a.social-icon:hover { transform: translateY(-2px); border-color: currentColor; }
+.social-icon--linkedin { color: #0a66c2; }
+.social-icon--strava { color: #fc4c02; }
+.social-pending { opacity: 0.38; cursor: default; }
 .profile-copy .journal-link { margin: 44px 0 0; font-size: 17px; }
 .prose blockquote { margin: 24px 0; padding-left: 24px; border-left: 2px solid var(--rule); color: var(--muted); }
 code { font-size: 0.85em; }
@@ -71,7 +75,6 @@ pre { max-width: 100%; overflow: auto; padding: 16px; background: #eeeee7; }
 @media (max-width: 480px) {
   body { padding: 0 24px; font-size: 18px; }
   .site-header { padding: 24px 0; }
-  .site-name { font-size: 24px; }
   nav { gap: 18px; }
   main { padding: 48px 0 64px; }
 }

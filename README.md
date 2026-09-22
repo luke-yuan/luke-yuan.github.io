@@ -1,4 +1,4 @@
-# Along the Way
+# Luke's notebook
 
 A small personal site for thoughts and travel, hosted at <https://luke-yuan.github.io>.
 Eleventy turns Markdown into static HTML. GitHub Actions publishes each change to `master`.
@@ -60,9 +60,9 @@ socials:
     url: https://www.strava.com/athletes/your-id
 ```
 
-Leave a URL blank (`url: ""`) to show just the platform's name until you add the
-link, or use `socials: []` to hide the social links. Change the site title using the `name`
-field in `src/_data/site.json`.
+Leave a URL blank (`url: ""`) to show its logo in a muted state until you add the
+link, or use `socials: []` to hide the social links. The `name` field in
+`src/_data/site.json` is used in browser-tab titles and is not shown in the header.
 
 ## Local preview
 
