@@ -61,6 +61,15 @@ a.social-icon:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px current
 .social-pending { opacity: 0.72; cursor: default; }
 .profile-copy .journal-link { margin: 44px 0 0; font-size: 17px; }
 .prose blockquote { margin: 24px 0; padding-left: 24px; border-left: 2px solid var(--rule); color: var(--muted); }
+.prose h2 { margin-top: 56px; }
+.prose h3 { margin: 36px 0 20px; font-size: 22px; line-height: 1.4; font-weight: normal; }
+.post-photo { margin: 36px 0; }
+.post-photo--portrait { max-width: 520px; margin-right: auto; margin-left: auto; }
+.post-photo img { width: 100%; height: auto; margin: 0; border-radius: 3px; }
+.post-photo figcaption { margin-top: 10px; color: var(--muted); font: 13px/1.6 system-ui, sans-serif; text-align: center; }
+.prose table { width: 100%; margin: 28px 0; border-collapse: collapse; font: 14px/1.6 system-ui, sans-serif; }
+.prose th, .prose td { padding: 12px 8px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.prose th { font-weight: 600; }
 code { font-size: 0.85em; }
 pre { max-width: 100%; overflow: auto; padding: 16px; background: #eeeee7; }
 .site-footer { justify-content: space-between; gap: 20px; padding: 24px 0 36px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 11px; }
