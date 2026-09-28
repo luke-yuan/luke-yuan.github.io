@@ -85,3 +85,15 @@ Check the repository's **Actions** tab if an update does not appear.
 
 Site name and repository links live in `src/_data/site.json`. Page styles live in
 `src/assets/style.css`. This configuration serves from the root of `luke-yuan.github.io`.
+
+## Search engines
+
+`/sitemap.xml` is generated on every build and includes About, Journal, and all
+published posts. Adding or deleting a post updates the sitemap automatically.
+Manage, the 404 page, and the Google verification file are not included.
+`/robots.txt` allows crawling and points search engines to the sitemap.
+
+In Google Search Console, select the site's URL-prefix property, open **Sitemaps**,
+and submit `sitemap.xml`. The public site URL is configured in `src/_data/site.json`.
+Keep the Google verification file in `verification/`; it is copied unchanged to
+the site root on every build.
