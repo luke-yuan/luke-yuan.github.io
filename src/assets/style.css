@@ -72,7 +72,7 @@ a.social-icon:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px current
 .prose th { font-weight: 600; }
 code { font-size: 0.85em; }
 pre { max-width: 100%; overflow: auto; padding: 16px; background: #eeeee7; }
-.site-footer { justify-content: space-between; gap: 20px; padding: 24px 0 36px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 11px; }
+.site-footer { justify-content: flex-end; gap: 20px; padding: 24px 0 36px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 11px; }
 .site-footer a { color: var(--muted); }
 .skip-link { position: absolute; left: -10000px; }
 .skip-link:focus { left: 16px; top: 8px; background: var(--paper); padding: 8px; }
