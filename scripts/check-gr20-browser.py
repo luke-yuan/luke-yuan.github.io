@@ -8,7 +8,7 @@ from playwright.sync_api import sync_playwright
 parser = argparse.ArgumentParser()
 parser.add_argument("--base-url", default="http://localhost:8080")
 args = parser.parse_args()
-url = args.base_url.rstrip("/") + "/journal/2026-09-24-gr20-in-7-days/"
+url = args.base_url.rstrip("/") + "/journal/gr20-in-7-days/"
 output = Path(tempfile.mkdtemp(prefix="gr20-browser-"))
 tile = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jA8sAAAAASUVORK5CYII=")
 
@@ -99,6 +99,12 @@ with sync_playwright() as playwright:
     assert direct.locator("#gr20-route").get_attribute("data-route-ready") is None
     assert direct.locator("#route-selection-day-5").text_content().startswith("Day 5")
     print("PASS: direct link to a daily map works without initializing the overview")
+    legacy = context.new_page()
+    legacy.goto(args.base_url.rstrip("/") + "/journal/2026-09-24-gr20-in-7-days/?source=old-link#gr20-day-5")
+    legacy.wait_for_url(url + "?source=old-link#gr20-day-5")
+    legacy.wait_for_function("document.querySelector('#gr20-day-5').dataset.routeReady === 'true'")
+    assert legacy.locator("#route-map-day-5").is_visible()
+    print("PASS: old dated URL forwards to the clean URL, preserving query and day anchor")
     context.close()
 
     context = browser.new_context(java_script_enabled=False, viewport={"width": 390, "height": 844})
@@ -111,6 +117,9 @@ with sync_playwright() as playwright:
         assert page.locator(f"#gr20-day-{day} .route-outline path").count() == 1
     assert page.locator(".route-day-stats").count() == 8
     assert not page.locator("#route-map-status").is_visible()
+    page.goto(args.base_url.rstrip("/") + "/journal/2026-09-24-gr20-in-7-days/")
+    page.wait_for_url(url)
+    assert page.locator("h1").text_content() == "GR20 in 7 Days as an Outdoor Noob"
     print("PASS: no-JavaScript route outline, all daily figures and downloads")
     context.close()
 

@@ -1,11 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, access } from "node:fs/promises";
+import postData from "../src/posts/posts.11tydata.js";
 
 const read = (path) => readFile(new URL(`../_site/${path}`, import.meta.url), "utf8");
 
 test("post renders the route explorer alongside all existing photos and GPX links", async () => {
-  const html = await read("journal/2026-09-24-gr20-in-7-days/index.html");
+  const html = await read("journal/gr20-in-7-days/index.html");
   assert.equal((html.match(/<figure\b/g) || []).length, 18);
   assert.equal((html.match(/data-day="\d"/g) || []).length, 8);
   assert.equal((html.match(/class="route-day-stats"/g) || []).length, 8);
@@ -24,7 +25,7 @@ test("post renders the route explorer alongside all existing photos and GPX link
 
 test("route JSON, static card figures, and downloadable files agree", async () => {
   const data = JSON.parse(await read("assets/gr20/route-data.json"));
-  const html = await read("journal/2026-09-24-gr20-in-7-days/index.html");
+  const html = await read("journal/gr20-in-7-days/index.html");
   assert.equal(data.days.length, 7);
   for (const day of data.days) {
     assert.ok(html.includes(`${day.distanceLabel} km <span>+${day.gainLabel} m`));
@@ -34,7 +35,7 @@ test("route JSON, static card figures, and downloadable files agree", async () =
 });
 
 test("each hiking-day heading is immediately followed by its own map, without duplicate IDs", async () => {
-  const html = await read("journal/2026-09-24-gr20-in-7-days/index.html");
+  const html = await read("journal/gr20-in-7-days/index.html");
   assert.equal((html.match(/class="route-explorer route-explorer--daily"/g) || []).length, 7);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(new Set(ids).size, ids.length);
@@ -54,4 +55,25 @@ test("mapping libraries only load on the GR20 post; sitemap stays unchanged", as
   const sitemap = await read("sitemap.xml");
   assert.equal((sitemap.match(/<loc>/g) || []).length, 3);
   assert.doesNotMatch(sitemap, /route-data/);
+});
+
+test("post URLs omit dates while keeping the publication date and old-link redirect", async () => {
+  const clean = "/journal/gr20-in-7-days/";
+  const old = "/journal/2026-09-24-gr20-in-7-days/";
+  assert.equal(postData.eleventyComputed.permalink({ page: { fileSlug: "gr20-in-7-days" } }), clean);
+  assert.equal(postData.eleventyComputed.permalink({ page: { fileSlug: "another-post" } }), "/journal/another-post/");
+  const html = await read("journal/gr20-in-7-days/index.html");
+  assert.ok(html.includes(`rel="canonical" href="https://luke-yuan.github.io${clean}"`));
+  assert.match(html, /<time datetime="2026-09-24">/);
+  const journal = await read("journal/index.html");
+  assert.ok(journal.includes(`href="${clean}"`));
+  assert.ok(!journal.includes(`href="${old}"`));
+  const sitemap = await read("sitemap.xml");
+  assert.ok(sitemap.includes(clean));
+  assert.ok(!sitemap.includes(old));
+  const redirect = await read("journal/2026-09-24-gr20-in-7-days/index.html");
+  assert.ok(redirect.includes(`rel="canonical" href="https://luke-yuan.github.io${clean}"`));
+  assert.match(redirect, /window\.location\.search \+ window\.location\.hash/);
+  assert.match(redirect, /<noscript><meta http-equiv="refresh"/);
+  assert.doesNotMatch(redirect, /class="route-explorer"/);
 });

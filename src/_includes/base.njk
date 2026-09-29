@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ (description or site.description) | escape }}">
     <title>{{ title | escape }} · {{ site.name | escape }}</title>
+    {% if page.url and page.url != "/404.html" %}
+    <link rel="canonical" href="{{ site.url | escape }}{{ page.url | escape }}">
+    {% endif %}
     <link rel="stylesheet" href="/assets/style.css?v=4">
     {% if routeMap == "gr20" %}
     <link rel="stylesheet" href="/assets/vendor/leaflet/leaflet.css">

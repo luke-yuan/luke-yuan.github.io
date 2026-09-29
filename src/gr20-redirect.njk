@@ -1,0 +1,22 @@
+---
+permalink: /journal/2026-09-24-gr20-in-7-days/
+layout: false
+eleventyExcludeFromCollections: true
+redirect: /journal/gr20-in-7-days/
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>This journal has moved · {{ site.name | escape }}</title>
+    <link rel="canonical" href="{{ site.url | escape }}{{ redirect | escape }}">
+    <script>
+      window.location.replace({{ redirect | dump | safe }} + window.location.search + window.location.hash);
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url={{ redirect | escape }}"></noscript>
+  </head>
+  <body>
+    <p>This journal has moved. <a href="{{ redirect | escape }}">Read GR20 in 7 Days as an Outdoor Noob</a>.</p>
+  </body>
+</html>

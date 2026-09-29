@@ -20,6 +20,12 @@ Deleting a post removes it from the current website; it stays in the repository'
 
 Create posts inside `src/posts/`. Use real dates in `YYYY-MM-DD-short-title.md` filenames;
 the filename supplies the date. Notes are listed newest first.
+Published URLs omit the date: `2026-09-24-gr20-in-7-days.md` becomes
+`/journal/gr20-in-7-days/`. Keep the date in the source filename for the displayed
+publication date and sorting. The original dated GR20 URL forwards to the new
+address through `src/gr20-redirect.njk`, preserving query strings and section
+anchors with JavaScript, with an automatic no-JavaScript fallback. This is a
+static-page redirect, not an HTTP 301. The sitemap lists only the new address.
 
 ```markdown
 ---
