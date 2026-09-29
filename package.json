@@ -4,9 +4,12 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/clean.js && eleventy --serve",
-    "build": "node scripts/clean.js && eleventy"
+    "build": "node scripts/clean.js && eleventy",
+    "test": "npm run build && node --test"
   },
   "devDependencies": {
-    "@11ty/eleventy": "3.1.6"
+    "@11ty/eleventy": "3.1.6",
+    "fast-xml-parser": "5.11.2",
+    "leaflet": "1.9.4"
   }
 }

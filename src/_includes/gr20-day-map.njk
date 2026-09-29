@@ -1,0 +1,43 @@
+<section class="route-explorer route-explorer--daily" id="gr20-day-{{ routeDay.day }}" data-route-day="{{ routeDay.day }}" aria-label="Day {{ routeDay.day }} route, distance and elevation">
+  <div class="route-card">
+    <div class="route-summary">
+      <div>
+        <p class="route-kicker" id="route-selection-day-{{ routeDay.day }}">Day {{ routeDay.day }} · South → North</p>
+        <h3 id="route-title-day-{{ routeDay.day }}">{{ routeDay.from }} → {{ routeDay.to }}</h3>
+      </div>
+      <dl class="route-metrics">
+        <div><dt>Distance</dt><dd><span id="route-distance-day-{{ routeDay.day }}">{{ routeDay.distanceLabel }}</span> <small>km</small></dd></div>
+        <div><dt>Est. elevation gain</dt><dd>+<span id="route-gain-day-{{ routeDay.day }}">{{ routeDay.gainLabel }}</span> <small>m</small></dd></div>
+      </dl>
+    </div>
+    <div class="route-map-shell">
+      <svg class="route-outline" viewBox="0 0 640 360" role="img" aria-labelledby="route-outline-title-day-{{ routeDay.day }}">
+        <title id="route-outline-title-day-{{ routeDay.day }}">Day {{ routeDay.day }} GPX route from {{ routeDay.from }} to {{ routeDay.to }}</title>
+        <text x="32" y="40" class="route-outline-note">N ↑</text>
+        <path d="{{ routeDay.outline.paths[0] }}" fill="none" stroke="{{ routeDay.color }}" stroke-width="3" stroke-linejoin="round" />
+        <circle cx="{{ routeDay.outline.start[0] }}" cy="{{ routeDay.outline.start[1] }}" r="11" fill="#fffefa" stroke="{{ routeDay.color }}" stroke-width="2" />
+        <text x="{{ routeDay.outline.start[0] }}" y="{{ routeDay.outline.start[1] + 4 }}" text-anchor="middle">S</text>
+        <circle cx="{{ routeDay.outline.end[0] }}" cy="{{ routeDay.outline.end[1] }}" r="11" fill="#fffefa" stroke="{{ routeDay.color }}" stroke-width="2" />
+        <text x="{{ routeDay.outline.end[0] }}" y="{{ routeDay.outline.end[1] + 4 }}" text-anchor="middle">F</text>
+        <text x="32" y="348" class="route-outline-note">S = start · F = finish · GPX outline, not a navigation map</text>
+      </svg>
+      <div id="route-map-day-{{ routeDay.day }}" class="route-map" role="region" aria-label="Interactive Day {{ routeDay.day }} route map" hidden></div>
+    </div>
+    <p class="route-map-status" id="route-map-status-day-{{ routeDay.day }}" role="status" hidden>Loading the interactive map…</p>
+    <noscript><p class="route-map-status">Enable JavaScript for the interactive map and elevation profile.</p></noscript>
+    <div class="route-profile" id="route-profile-day-{{ routeDay.day }}" hidden>
+      <div class="route-profile-heading">
+        <span>Elevation profile <small>(m)</small></span>
+        <span class="profile-readout" id="profile-readout-day-{{ routeDay.day }}">Move over the profile to explore</span>
+      </div>
+      <svg class="elevation-profile" id="elevation-profile-day-{{ routeDay.day }}" viewBox="0 0 640 170" role="img" aria-label="Day {{ routeDay.day }} elevation profile"></svg>
+    </div>
+    <div class="route-footnote">
+      <div class="route-downloads">
+        <a id="route-download-day-{{ routeDay.day }}" href="{{ routeDay.gpx }}" download>Download Day {{ routeDay.day }} GPX</a>
+        <a href="#gr20-route">Full route &amp; sources ↑</a>
+      </div>
+      <p class="route-estimate-label">Distance: GPX · Elevation: <a href="https://geoservices.ign.fr/rgealti">© IGN · RGE ALTI</a> · Estimated meters climbed (D+)</p>
+    </div>
+  </div>
+</section>

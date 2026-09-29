@@ -1,5 +1,11 @@
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/leaflet/dist": "assets/vendor/leaflet",
+    "node_modules/leaflet/LICENSE": "assets/vendor/leaflet/LICENSE",
+  });
+  eleventyConfig.addWatchTarget("scripts/gr20-routes.js");
+  eleventyConfig.addWatchTarget("data/gr20-ign-elevations.json");
   // Keep Google's ownership verification file unchanged at the site root.
   eleventyConfig.addPassthroughCopy({
     "verification/google3d88efc0837bd468.html": "google3d88efc0837bd468.html",

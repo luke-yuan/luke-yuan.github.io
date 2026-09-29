@@ -97,3 +97,51 @@ In Google Search Console, select the site's URL-prefix property, open **Sitemaps
 and submit `sitemap.xml`. The public site URL is configured in `src/_data/site.json`.
 Keep the Google verification file in `verification/`; it is copied unchanged to
 the site root on every build.
+
+## GR20 route explorer
+
+The GR20 post embeds `src/_includes/gr20-map.njk` after Preparation. The
+tabbed overview is preserved, with a separate `gr20-day-map.njk` immediately
+after each Day 1–7 heading. Each daily map is fixed to its own route and has an
+independent elevation profile, distance/D+, and GPX link. Maps initialize only
+when scrolled into view and share a single route-data request. Each also has a
+day-specific static outline for readers without JavaScript.
+The `routeMap: gr20` front matter loads the locally hosted Leaflet library and the
+explorer's CSS/JS only on that post. `templateEngineOverride: njk,md` allows the
+include in Markdown.
+
+Every build reads the seven files in `src/assets/gr20/routes/` using
+`scripts/gr20-routes.js`. This generates the static daily cards, a no-JavaScript
+route outline, and `/assets/gr20/route-data.json`. Selecting a day highlights its
+route and updates its distance, elevation gain, profile, and GPX download link.
+The map uses OpenStreetMap's standard tiles with visible attribution; there is
+no API key, analytics, tile prefetch, or offline tile download.
+
+These are **route estimates, not recorded activity totals or official published
+stage totals**. Distance sums horizontal haversine distances along the GPX.
+Elevation profiles and D+ use IGN RGE ALTI terrain elevations sampled at each
+original GPX vertex, cached in `data/gr20-ign-elevations.json`. D+ sums positive
+elevation differences without smoothing and is displayed to the nearest 10 m.
+Separate tracks/segments are not joined. The source, retrieval date, and method
+are disclosed in the widget. Terrain-model and track-spacing errors can affect
+totals in either direction; no upward correction is applied.
+
+To refresh elevations after replacing a GPX, run
+`python3 scripts/refresh-gr20-elevations.py` (Python standard library only).
+It calls the public IGN elevation API in batches, validates returned coordinates
+and heights, and caches each completed day with a SHA-256 of the GPX. Unchanged
+routes are reused; to refetch one, remove its entry from the cache. A build never
+calls IGN or silently falls back to GPX elevations: missing, incomplete, or stale
+cached terrain data fails the build. Keep filenames or update the list in
+`scripts/gr20-routes.js`.
+
+Run `npm test` for the build, GPX calculation tests, and static-page regression
+checks. For a browser check, select each day, reset to Full route, hover the
+profile, and try keyboard and mobile layouts. The outline, daily figures, and
+downloads should remain usable without JavaScript. Mock tile requests in
+automated browser tests rather than repeatedly fetching community-hosted tiles.
+An optional smoke test is included for a Python environment with Playwright and
+Chromium installed: start the preview, then run
+`python3 scripts/check-gr20-browser.py --base-url http://localhost:8080`.
+It mocks all tile requests and checks day selection, profiles, keyboard/mobile
+layouts, no-JavaScript rendering, and network-failure fallbacks.
