@@ -13,6 +13,4 @@ socials:
 ---
 # Hi, I'm Luke.
 
-I keep notes on where I go, what I'm thinking about, and the small things worth remembering.
-
-This is where they live.
+I'm a software engineer at Uber. This is a journal of my life outside of work.

@@ -5,6 +5,15 @@ import postData from "../src/posts/posts.11tydata.js";
 
 const read = (path) => readFile(new URL(`../_site/${path}`, import.meta.url), "utf8");
 
+test("About page uses the requested intro and preserves its heading and links", async () => {
+  const html = await read("index.html");
+  assert.match(html, /<h1>Hi, I'm Luke\.<\/h1>/);
+  assert.match(html, /<p>I'm a software engineer at Uber\. This is a journal of my life outside of work\.<\/p>/);
+  assert.doesNotMatch(html, /I keep notes on where I go|This is where they live/);
+  assert.match(html, /aria-label="LinkedIn"/);
+  assert.match(html, /href="\/journal\/">Read the journal/);
+});
+
 test("post renders the route explorer alongside all existing photos and GPX links", async () => {
   const html = await read("journal/gr20-in-7-days/index.html");
   assert.equal((html.match(/<figure\b/g) || []).length, 18);
